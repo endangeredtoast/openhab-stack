@@ -1,0 +1,17 @@
+version: '3'
+services:
+  app:
+    image: openhab/openhab:latest-alpine
+    volumes:
+      - ./conf:/opnhab/conf
+      - ./userdata:/openhab/userdata
+      - ./addons:/openhab/addons
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      USER_ID: ${USER_ID:?err}
+      GROUP_ID: ${GROUP_ID:?err}
+      CRYPTO_POLICY: unlimited
+      OPENHAB_HTTP_PORT: ${HTTP_PORT}
+      OPENHAB_HTTPS_PORT: ${HTTPS_PORT}
+    restart: always
